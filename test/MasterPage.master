@@ -1,0 +1,34 @@
+﻿<%@ Master Language="C#" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+    <head>
+        <title>Development Project</title>
+        <link href="/css/sitestyles.css" rel="Stylesheet" type="text/css" />
+    </head>
+    <body>
+        <form id="form1" runat="server">
+        <asp:ScriptManager ID="smAjax" runat="server" EnablePartialRendering="true" />
+            <table align="center" cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr>
+                    <td class="logoText" style="vertical-align:middle;" width="75%">
+                        <img src="img/logo.PNG" border="0" height="75" valign="absMiddle" /> Publishers Project
+                    </td>
+                    <td style="text-align:right;">
+                        <hr class="logoLines" width="20%" />
+                        <hr class="logoLines" width="40%" />
+                        <hr class="logoLines" width="60%" />
+                        <hr class="logoLines" width="80%" />
+                        <hr class="logoLines" width="100%" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

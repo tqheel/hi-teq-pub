@@ -1,0 +1,66 @@
+﻿/* green logo text */
+.logoText
+{
+    color: Green;
+    font-family: Arial;
+    font-weight: bold;
+    font-size: 60px;   
+}
+
+/* green horizontal logo lines */
+.logoLines
+{
+    background-color: Green;
+    height: 3px;
+}
+
+/* use for table/gridview headers */
+.colTitle
+{
+    background-color: Green;
+    color: White;
+    font-family: Arial;
+    font-size: 11px;
+    font-weight: bold;
+    text-align: left;
+}
+
+/* use for white table/gridview rows */
+.altCellWhite
+{
+    background-color: White;
+    color: Black;
+    font-family: Arial;
+    font-size: 11px;
+    text-align: left;
+    vertical-align: top;
+}
+
+/* use for gray table/gridview rows */
+.altCellGray
+{
+    background-color: #F0F0F0;
+    color: Black;
+    font-family: Arial;
+    font-size: 11px;
+    text-align: left;
+    vertical-align: top;
+}
+
+/* use for text in table cell/label if not using altCellWhite/altCellGray class */
+.pageText
+{
+    color: Black;
+    font-family: Arial;
+    font-size: 11px;
+    vertical-align: top;
+}
+
+/* use for any href/link buttons on page */
+.linkText
+{
+    color: Blue;
+    font-family: Arial;
+    font-size: 11px;
+    text-decoration: none;
+}
