@@ -1,10 +1,23 @@
-﻿/* green logo text */
+﻿
+body
+{
+    font-family: 'Bookman Old Style';
+}
+/*Header for Menu*/
+#header {
+        float:left;
+        width:100%;
+		border-top: 2px solid #037601;
+        border-bottom: 2px solid #037601;
+    }
+
+/* green logo text */
 .logoText
 {
     color: Green;
-    font-family: Arial;
+    font-family: 'Bookman Old Style';
     font-weight: bold;
-    font-size: 60px;   
+    font-size: 30px;   
 }
 
 /* green horizontal logo lines */
@@ -19,7 +32,7 @@
 {
     background-color: Green;
     color: White;
-    font-family: Arial;
+    font-family: 'Bookman Old Style';
     font-size: 11px;
     font-weight: bold;
     text-align: left;
@@ -30,7 +43,7 @@
 {
     background-color: White;
     color: Black;
-    font-family: Arial;
+    font-family: 'Bookman Old Style';
     font-size: 11px;
     text-align: left;
     vertical-align: top;
@@ -41,7 +54,7 @@
 {
     background-color: #F0F0F0;
     color: Black;
-    font-family: Arial;
+    font-family: 'Bookman Old Style';
     font-size: 11px;
     text-align: left;
     vertical-align: top;
@@ -51,8 +64,8 @@
 .pageText
 {
     color: Black;
-    font-family: Arial;
-    font-size: 11px;
+    font-family: 'Bookman Old Style';
+    font-size: 14px;
     vertical-align: top;
 }
 
@@ -60,7 +73,12 @@
 .linkText
 {
     color: Blue;
-    font-family: Arial;
+    font-family: 'Bookman Old Style';
     font-size: 11px;
     text-decoration: none;
 }
+
+/* For styling forms using definition lists*/
+dl.form     { clear: both; }
+dl.form dt  { float: left; clear: left; width: 150px; padding: 8px !important; }
+dl.form dd  { padding: 8px; }
