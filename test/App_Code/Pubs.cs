@@ -10,6 +10,11 @@ using pubsModel;
 /// </summary>
 public class Pubs
 {
+    public class _Royalty
+    {
+         
+    }
+
     public static List<publisher> GetPublishers()
     {
 
@@ -20,4 +25,6 @@ public class Pubs
         }
 
     }
+
+    
 }

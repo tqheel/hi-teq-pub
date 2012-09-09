@@ -16,9 +16,21 @@
             <li><a href="#gridview">GridView Style Report</a></li>
             <li><a href="#datatable">jQuery Datatable Style Report</a></li>
         </ul>
+        
         <div id="gridview">
-            <asp:GridView ID="GridView1" runat="server">
-            </asp:GridView>
+            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+            <ContentTemplate>
+                <asp:DropDownList ID="ddlPubs" runat="server">
+                </asp:DropDownList>
+                <asp:GridView ID="GridView1" runat="server"
+                            CssClass="altCellWhite"
+                            AlternatingRowStyle-CssClass="altCellGray" >
+                </asp:GridView>
+            </ContentTemplate>
+            
+
+            </asp:UpdatePanel>
+            
         </div>
         <div id="datatable">
             dataTable goes here

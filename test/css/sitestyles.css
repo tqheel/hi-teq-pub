@@ -11,6 +11,7 @@ body
         border-bottom: 2px solid #037601;
     }
 
+
 /* green logo text */
 .logoText
 {
@@ -28,7 +29,7 @@ body
 }
 
 /* use for table/gridview headers */
-.colTitle
+.altCellWhite tr:first-child
 {
     background-color: Green;
     color: White;
@@ -39,7 +40,7 @@ body
 }
 
 /* use for white table/gridview rows */
-.altCellWhite
+.altCellWhite td
 {
     background-color: White;
     color: Black;
@@ -50,7 +51,7 @@ body
 }
 
 /* use for gray table/gridview rows */
-.altCellGray
+.altCellGray td
 {
     background-color: #F0F0F0;
     color: Black;
