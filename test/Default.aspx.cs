@@ -16,7 +16,8 @@ public partial class _Default: System.Web.UI.Page
         ddlPubs.DataTextField = "pub_name";
         ddlPubs.DataValueField = "pub_id";
         ddlPubs.DataBind();
-        GridView1.DataSource = pList;
+        //bind initial data grid to the default publisher in the DDL
+        GridView1.DataSource = Pubs.GetRoyalties(ddlPubs.SelectedValue);
         GridView1.DataBind();
        
     }
