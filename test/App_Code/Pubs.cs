@@ -12,7 +12,18 @@ public class Pubs
 {
     public class _Royalty
     {
-         
+        public string StoreOrderID { get; set; }
+        public string Title { get; set; }
+        public string Author { get; set; }
+        public string Royalty {get;set;}
+    }
+
+    public static List<_Royalty> GetRoyalties(string pubID)
+    {
+        List<_Royalty> royalties = new List<_Royalty>();
+
+
+        return royalties;
     }
 
     public static List<publisher> GetPublishers()
