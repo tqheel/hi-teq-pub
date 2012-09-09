@@ -1,0 +1,874 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="pubsModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="pubsModelStoreContainer">
+          <EntitySet Name="authors" EntityType="pubsModel.Store.authors" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="discounts" EntityType="pubsModel.Store.discounts" store:Type="Tables" store:Schema="dbo" store:Name="discounts">
+            <DefiningQuery>SELECT 
+      [discounts].[discounttype] AS [discounttype], 
+      [discounts].[stor_id] AS [stor_id], 
+      [discounts].[lowqty] AS [lowqty], 
+      [discounts].[highqty] AS [highqty], 
+      [discounts].[discount] AS [discount]
+      FROM [dbo].[discounts] AS [discounts]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="employee" EntityType="pubsModel.Store.employee" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="jobs" EntityType="pubsModel.Store.jobs" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="pub_info" EntityType="pubsModel.Store.pub_info" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="publishers" EntityType="pubsModel.Store.publishers" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="roysched" EntityType="pubsModel.Store.roysched" store:Type="Tables" store:Schema="dbo" store:Name="roysched">
+            <DefiningQuery>SELECT 
+      [roysched].[title_id] AS [title_id], 
+      [roysched].[lorange] AS [lorange], 
+      [roysched].[hirange] AS [hirange], 
+      [roysched].[royalty] AS [royalty]
+      FROM [dbo].[roysched] AS [roysched]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="sales" EntityType="pubsModel.Store.sales" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="stores" EntityType="pubsModel.Store.stores" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="titleauthor" EntityType="pubsModel.Store.titleauthor" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="titles" EntityType="pubsModel.Store.titles" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK__discounts__stor___173876EA" Association="pubsModel.Store.FK__discounts__stor___173876EA">
+            <End Role="stores" EntitySet="stores" />
+            <End Role="discounts" EntitySet="discounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__employee__job_id__25869641" Association="pubsModel.Store.FK__employee__job_id__25869641">
+            <End Role="jobs" EntitySet="jobs" />
+            <End Role="employee" EntitySet="employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__employee__pub_id__286302EC" Association="pubsModel.Store.FK__employee__pub_id__286302EC">
+            <End Role="publishers" EntitySet="publishers" />
+            <End Role="employee" EntitySet="employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__pub_info__pub_id__20C1E124" Association="pubsModel.Store.FK__pub_info__pub_id__20C1E124">
+            <End Role="publishers" EntitySet="publishers" />
+            <End Role="pub_info" EntitySet="pub_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK__roysched__title___15502E78" Association="pubsModel.Store.FK__roysched__title___15502E78">
+            <End Role="titles" EntitySet="titles" />
+            <End Role="roysched" EntitySet="roysched" />
+          </AssociationSet>
+          <AssociationSet Name="FK__sales__stor_id__1273C1CD" Association="pubsModel.Store.FK__sales__stor_id__1273C1CD">
+            <End Role="stores" EntitySet="stores" />
+            <End Role="sales" EntitySet="sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK__sales__title_id__1367E606" Association="pubsModel.Store.FK__sales__title_id__1367E606">
+            <End Role="titles" EntitySet="titles" />
+            <End Role="sales" EntitySet="sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK__titleauth__au_id__0CBAE877" Association="pubsModel.Store.FK__titleauth__au_id__0CBAE877">
+            <End Role="authors" EntitySet="authors" />
+            <End Role="titleauthor" EntitySet="titleauthor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__titleauth__title__0DAF0CB0" Association="pubsModel.Store.FK__titleauth__title__0DAF0CB0">
+            <End Role="titles" EntitySet="titles" />
+            <End Role="titleauthor" EntitySet="titleauthor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__titles__pub_id__08EA5793" Association="pubsModel.Store.FK__titles__pub_id__08EA5793">
+            <End Role="publishers" EntitySet="publishers" />
+            <End Role="titles" EntitySet="titles" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="authors">
+          <Key>
+            <PropertyRef Name="au_id" />
+          </Key>
+          <Property Name="au_id" Type="varchar" Nullable="false" MaxLength="11" />
+          <Property Name="au_lname" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="au_fname" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="phone" Type="char" Nullable="false" MaxLength="12" />
+          <Property Name="address" Type="varchar" MaxLength="40" />
+          <Property Name="city" Type="varchar" MaxLength="20" />
+          <Property Name="state" Type="char" MaxLength="2" />
+          <Property Name="zip" Type="char" MaxLength="5" />
+          <Property Name="contract" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'pubs.dbo.discounts' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="discounts">
+          <Key>
+            <PropertyRef Name="discounttype" />
+            <PropertyRef Name="discount" />
+          </Key>
+          <Property Name="discounttype" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="stor_id" Type="char" MaxLength="4" />
+          <Property Name="lowqty" Type="smallint" />
+          <Property Name="highqty" Type="smallint" />
+          <Property Name="discount" Type="decimal" Nullable="false" Precision="4" Scale="2" />
+        </EntityType>
+        <EntityType Name="employee">
+          <Key>
+            <PropertyRef Name="emp_id" />
+          </Key>
+          <Property Name="emp_id" Type="char" Nullable="false" MaxLength="9" />
+          <Property Name="fname" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="minit" Type="char" MaxLength="1" />
+          <Property Name="lname" Type="varchar" Nullable="false" MaxLength="30" />
+          <Property Name="job_id" Type="smallint" Nullable="false" />
+          <Property Name="job_lvl" Type="tinyint" />
+          <Property Name="pub_id" Type="char" Nullable="false" MaxLength="4" />
+          <Property Name="hire_date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="jobs">
+          <Key>
+            <PropertyRef Name="job_id" />
+          </Key>
+          <Property Name="job_id" Type="smallint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="job_desc" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="min_lvl" Type="tinyint" Nullable="false" />
+          <Property Name="max_lvl" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="pub_info">
+          <Key>
+            <PropertyRef Name="pub_id" />
+          </Key>
+          <Property Name="pub_id" Type="char" Nullable="false" MaxLength="4" />
+          <Property Name="logo" Type="image" />
+          <Property Name="pr_info" Type="text" />
+        </EntityType>
+        <EntityType Name="publishers">
+          <Key>
+            <PropertyRef Name="pub_id" />
+          </Key>
+          <Property Name="pub_id" Type="char" Nullable="false" MaxLength="4" />
+          <Property Name="pub_name" Type="varchar" MaxLength="40" />
+          <Property Name="city" Type="varchar" MaxLength="20" />
+          <Property Name="state" Type="char" MaxLength="2" />
+          <Property Name="country" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'pubs.dbo.roysched' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="roysched">
+          <Key>
+            <PropertyRef Name="title_id" />
+          </Key>
+          <Property Name="title_id" Type="varchar" Nullable="false" MaxLength="6" />
+          <Property Name="lorange" Type="int" />
+          <Property Name="hirange" Type="int" />
+          <Property Name="royalty" Type="int" />
+        </EntityType>
+        <EntityType Name="sales">
+          <Key>
+            <PropertyRef Name="stor_id" />
+            <PropertyRef Name="ord_num" />
+            <PropertyRef Name="title_id" />
+          </Key>
+          <Property Name="stor_id" Type="char" Nullable="false" MaxLength="4" />
+          <Property Name="ord_num" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="ord_date" Type="datetime" Nullable="false" />
+          <Property Name="qty" Type="smallint" Nullable="false" />
+          <Property Name="payterms" Type="varchar" Nullable="false" MaxLength="12" />
+          <Property Name="title_id" Type="varchar" Nullable="false" MaxLength="6" />
+        </EntityType>
+        <EntityType Name="stores">
+          <Key>
+            <PropertyRef Name="stor_id" />
+          </Key>
+          <Property Name="stor_id" Type="char" Nullable="false" MaxLength="4" />
+          <Property Name="stor_name" Type="varchar" MaxLength="40" />
+          <Property Name="stor_address" Type="varchar" MaxLength="40" />
+          <Property Name="city" Type="varchar" MaxLength="20" />
+          <Property Name="state" Type="char" MaxLength="2" />
+          <Property Name="zip" Type="char" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="titleauthor">
+          <Key>
+            <PropertyRef Name="au_id" />
+            <PropertyRef Name="title_id" />
+          </Key>
+          <Property Name="au_id" Type="varchar" Nullable="false" MaxLength="11" />
+          <Property Name="title_id" Type="varchar" Nullable="false" MaxLength="6" />
+          <Property Name="au_ord" Type="tinyint" />
+          <Property Name="royaltyper" Type="int" />
+        </EntityType>
+        <EntityType Name="titles">
+          <Key>
+            <PropertyRef Name="title_id" />
+          </Key>
+          <Property Name="title_id" Type="varchar" Nullable="false" MaxLength="6" />
+          <Property Name="title" Type="varchar" Nullable="false" MaxLength="80" />
+          <Property Name="type" Type="char" Nullable="false" MaxLength="12" />
+          <Property Name="pub_id" Type="char" MaxLength="4" />
+          <Property Name="price" Type="money" />
+          <Property Name="advance" Type="money" />
+          <Property Name="royalty" Type="int" />
+          <Property Name="ytd_sales" Type="int" />
+          <Property Name="notes" Type="varchar" MaxLength="200" />
+          <Property Name="pubdate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__discounts__stor___173876EA">
+          <End Role="stores" Type="pubsModel.Store.stores" Multiplicity="0..1" />
+          <End Role="discounts" Type="pubsModel.Store.discounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="stores">
+              <PropertyRef Name="stor_id" />
+            </Principal>
+            <Dependent Role="discounts">
+              <PropertyRef Name="stor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__employee__job_id__25869641">
+          <End Role="jobs" Type="pubsModel.Store.jobs" Multiplicity="1" />
+          <End Role="employee" Type="pubsModel.Store.employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="jobs">
+              <PropertyRef Name="job_id" />
+            </Principal>
+            <Dependent Role="employee">
+              <PropertyRef Name="job_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__employee__pub_id__286302EC">
+          <End Role="publishers" Type="pubsModel.Store.publishers" Multiplicity="1" />
+          <End Role="employee" Type="pubsModel.Store.employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="publishers">
+              <PropertyRef Name="pub_id" />
+            </Principal>
+            <Dependent Role="employee">
+              <PropertyRef Name="pub_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__pub_info__pub_id__20C1E124">
+          <End Role="publishers" Type="pubsModel.Store.publishers" Multiplicity="1" />
+          <End Role="pub_info" Type="pubsModel.Store.pub_info" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="publishers">
+              <PropertyRef Name="pub_id" />
+            </Principal>
+            <Dependent Role="pub_info">
+              <PropertyRef Name="pub_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__roysched__title___15502E78">
+          <End Role="titles" Type="pubsModel.Store.titles" Multiplicity="1" />
+          <End Role="roysched" Type="pubsModel.Store.roysched" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="titles">
+              <PropertyRef Name="title_id" />
+            </Principal>
+            <Dependent Role="roysched">
+              <PropertyRef Name="title_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__sales__stor_id__1273C1CD">
+          <End Role="stores" Type="pubsModel.Store.stores" Multiplicity="1" />
+          <End Role="sales" Type="pubsModel.Store.sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="stores">
+              <PropertyRef Name="stor_id" />
+            </Principal>
+            <Dependent Role="sales">
+              <PropertyRef Name="stor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__sales__title_id__1367E606">
+          <End Role="titles" Type="pubsModel.Store.titles" Multiplicity="1" />
+          <End Role="sales" Type="pubsModel.Store.sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="titles">
+              <PropertyRef Name="title_id" />
+            </Principal>
+            <Dependent Role="sales">
+              <PropertyRef Name="title_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__titleauth__au_id__0CBAE877">
+          <End Role="authors" Type="pubsModel.Store.authors" Multiplicity="1" />
+          <End Role="titleauthor" Type="pubsModel.Store.titleauthor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="authors">
+              <PropertyRef Name="au_id" />
+            </Principal>
+            <Dependent Role="titleauthor">
+              <PropertyRef Name="au_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__titleauth__title__0DAF0CB0">
+          <End Role="titles" Type="pubsModel.Store.titles" Multiplicity="1" />
+          <End Role="titleauthor" Type="pubsModel.Store.titleauthor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="titles">
+              <PropertyRef Name="title_id" />
+            </Principal>
+            <Dependent Role="titleauthor">
+              <PropertyRef Name="title_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__titles__pub_id__08EA5793">
+          <End Role="publishers" Type="pubsModel.Store.publishers" Multiplicity="0..1" />
+          <End Role="titles" Type="pubsModel.Store.titles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="publishers">
+              <PropertyRef Name="pub_id" />
+            </Principal>
+            <Dependent Role="titles">
+              <PropertyRef Name="pub_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="pubsModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="pubsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="authors" EntityType="pubsModel.author" />
+          <EntitySet Name="discounts" EntityType="pubsModel.discount" />
+          <EntitySet Name="employees" EntityType="pubsModel.employee" />
+          <EntitySet Name="jobs" EntityType="pubsModel.job" />
+          <EntitySet Name="pub_info" EntityType="pubsModel.pub_info" />
+          <EntitySet Name="publishers" EntityType="pubsModel.publisher" />
+          <EntitySet Name="royscheds" EntityType="pubsModel.roysched" />
+          <EntitySet Name="sales" EntityType="pubsModel.sale" />
+          <EntitySet Name="stores" EntityType="pubsModel.store" />
+          <EntitySet Name="titleauthors" EntityType="pubsModel.titleauthor" />
+          <EntitySet Name="titles" EntityType="pubsModel.title" />
+          <AssociationSet Name="FK__titleauth__au_id__0CBAE877" Association="pubsModel.FK__titleauth__au_id__0CBAE877">
+            <End Role="authors" EntitySet="authors" />
+            <End Role="titleauthor" EntitySet="titleauthors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__discounts__stor___173876EA" Association="pubsModel.FK__discounts__stor___173876EA">
+            <End Role="stores" EntitySet="stores" />
+            <End Role="discounts" EntitySet="discounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__employee__job_id__25869641" Association="pubsModel.FK__employee__job_id__25869641">
+            <End Role="jobs" EntitySet="jobs" />
+            <End Role="employee" EntitySet="employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__employee__pub_id__286302EC" Association="pubsModel.FK__employee__pub_id__286302EC">
+            <End Role="publishers" EntitySet="publishers" />
+            <End Role="employee" EntitySet="employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__pub_info__pub_id__20C1E124" Association="pubsModel.FK__pub_info__pub_id__20C1E124">
+            <End Role="publishers" EntitySet="publishers" />
+            <End Role="pub_info" EntitySet="pub_info" />
+          </AssociationSet>
+          <AssociationSet Name="FK__titles__pub_id__08EA5793" Association="pubsModel.FK__titles__pub_id__08EA5793">
+            <End Role="publishers" EntitySet="publishers" />
+            <End Role="titles" EntitySet="titles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__roysched__title___15502E78" Association="pubsModel.FK__roysched__title___15502E78">
+            <End Role="titles" EntitySet="titles" />
+            <End Role="roysched" EntitySet="royscheds" />
+          </AssociationSet>
+          <AssociationSet Name="FK__sales__stor_id__1273C1CD" Association="pubsModel.FK__sales__stor_id__1273C1CD">
+            <End Role="stores" EntitySet="stores" />
+            <End Role="sales" EntitySet="sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK__sales__title_id__1367E606" Association="pubsModel.FK__sales__title_id__1367E606">
+            <End Role="titles" EntitySet="titles" />
+            <End Role="sales" EntitySet="sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK__titleauth__title__0DAF0CB0" Association="pubsModel.FK__titleauth__title__0DAF0CB0">
+            <End Role="titles" EntitySet="titles" />
+            <End Role="titleauthor" EntitySet="titleauthors" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="author">
+          <Key>
+            <PropertyRef Name="au_id" />
+          </Key>
+          <Property Name="au_id" Type="String" Nullable="false" MaxLength="11" Unicode="false" FixedLength="false" />
+          <Property Name="au_lname" Type="String" Nullable="false" MaxLength="40" Unicode="false" FixedLength="false" />
+          <Property Name="au_fname" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="phone" Type="String" Nullable="false" MaxLength="12" Unicode="false" FixedLength="true" />
+          <Property Name="address" Type="String" MaxLength="40" Unicode="false" FixedLength="false" />
+          <Property Name="city" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="state" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+          <Property Name="zip" Type="String" MaxLength="5" Unicode="false" FixedLength="true" />
+          <Property Name="contract" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="titleauthors" Relationship="pubsModel.FK__titleauth__au_id__0CBAE877" FromRole="authors" ToRole="titleauthor" />
+        </EntityType>
+        <EntityType Name="discount">
+          <Key>
+            <PropertyRef Name="discounttype" />
+            <PropertyRef Name="discount1" />
+          </Key>
+          <Property Name="discounttype" Type="String" Nullable="false" MaxLength="40" Unicode="false" FixedLength="false" />
+          <Property Name="stor_id" Type="String" MaxLength="4" Unicode="false" FixedLength="true" />
+          <Property Name="lowqty" Type="Int16" />
+          <Property Name="highqty" Type="Int16" />
+          <Property Name="discount1" Type="Decimal" Nullable="false" Precision="4" Scale="2" />
+          <NavigationProperty Name="store" Relationship="pubsModel.FK__discounts__stor___173876EA" FromRole="discounts" ToRole="stores" />
+        </EntityType>
+        <EntityType Name="employee">
+          <Key>
+            <PropertyRef Name="emp_id" />
+          </Key>
+          <Property Name="emp_id" Type="String" Nullable="false" MaxLength="9" Unicode="false" FixedLength="true" />
+          <Property Name="fname" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="minit" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="lname" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="job_id" Type="Int16" Nullable="false" />
+          <Property Name="job_lvl" Type="Byte" />
+          <Property Name="pub_id" Type="String" Nullable="false" MaxLength="4" Unicode="false" FixedLength="true" />
+          <Property Name="hire_date" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="job" Relationship="pubsModel.FK__employee__job_id__25869641" FromRole="employee" ToRole="jobs" />
+          <NavigationProperty Name="publisher" Relationship="pubsModel.FK__employee__pub_id__286302EC" FromRole="employee" ToRole="publishers" />
+        </EntityType>
+        <EntityType Name="job">
+          <Key>
+            <PropertyRef Name="job_id" />
+          </Key>
+          <Property Name="job_id" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="job_desc" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="min_lvl" Type="Byte" Nullable="false" />
+          <Property Name="max_lvl" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="employees" Relationship="pubsModel.FK__employee__job_id__25869641" FromRole="jobs" ToRole="employee" />
+        </EntityType>
+        <EntityType Name="pub_info">
+          <Key>
+            <PropertyRef Name="pub_id" />
+          </Key>
+          <Property Name="pub_id" Type="String" Nullable="false" MaxLength="4" Unicode="false" FixedLength="true" />
+          <Property Name="logo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="pr_info" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="publisher" Relationship="pubsModel.FK__pub_info__pub_id__20C1E124" FromRole="pub_info" ToRole="publishers" />
+        </EntityType>
+        <EntityType Name="publisher">
+          <Key>
+            <PropertyRef Name="pub_id" />
+          </Key>
+          <Property Name="pub_id" Type="String" Nullable="false" MaxLength="4" Unicode="false" FixedLength="true" />
+          <Property Name="pub_name" Type="String" MaxLength="40" Unicode="false" FixedLength="false" />
+          <Property Name="city" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="state" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+          <Property Name="country" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="employees" Relationship="pubsModel.FK__employee__pub_id__286302EC" FromRole="publishers" ToRole="employee" />
+          <NavigationProperty Name="pub_info" Relationship="pubsModel.FK__pub_info__pub_id__20C1E124" FromRole="publishers" ToRole="pub_info" />
+          <NavigationProperty Name="titles" Relationship="pubsModel.FK__titles__pub_id__08EA5793" FromRole="publishers" ToRole="titles" />
+        </EntityType>
+        <EntityType Name="roysched">
+          <Key>
+            <PropertyRef Name="title_id" />
+          </Key>
+          <Property Name="title_id" Type="String" Nullable="false" MaxLength="6" Unicode="false" FixedLength="false" />
+          <Property Name="lorange" Type="Int32" />
+          <Property Name="hirange" Type="Int32" />
+          <Property Name="royalty" Type="Int32" />
+          <NavigationProperty Name="title" Relationship="pubsModel.FK__roysched__title___15502E78" FromRole="roysched" ToRole="titles" />
+        </EntityType>
+        <EntityType Name="sale">
+          <Key>
+            <PropertyRef Name="stor_id" />
+            <PropertyRef Name="ord_num" />
+            <PropertyRef Name="title_id" />
+          </Key>
+          <Property Name="stor_id" Type="String" Nullable="false" MaxLength="4" Unicode="false" FixedLength="true" />
+          <Property Name="ord_num" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="ord_date" Type="DateTime" Nullable="false" />
+          <Property Name="qty" Type="Int16" Nullable="false" />
+          <Property Name="payterms" Type="String" Nullable="false" MaxLength="12" Unicode="false" FixedLength="false" />
+          <Property Name="title_id" Type="String" Nullable="false" MaxLength="6" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="store" Relationship="pubsModel.FK__sales__stor_id__1273C1CD" FromRole="sales" ToRole="stores" />
+          <NavigationProperty Name="title" Relationship="pubsModel.FK__sales__title_id__1367E606" FromRole="sales" ToRole="titles" />
+        </EntityType>
+        <EntityType Name="store">
+          <Key>
+            <PropertyRef Name="stor_id" />
+          </Key>
+          <Property Name="stor_id" Type="String" Nullable="false" MaxLength="4" Unicode="false" FixedLength="true" />
+          <Property Name="stor_name" Type="String" MaxLength="40" Unicode="false" FixedLength="false" />
+          <Property Name="stor_address" Type="String" MaxLength="40" Unicode="false" FixedLength="false" />
+          <Property Name="city" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="state" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+          <Property Name="zip" Type="String" MaxLength="5" Unicode="false" FixedLength="true" />
+          <NavigationProperty Name="discounts" Relationship="pubsModel.FK__discounts__stor___173876EA" FromRole="stores" ToRole="discounts" />
+          <NavigationProperty Name="sales" Relationship="pubsModel.FK__sales__stor_id__1273C1CD" FromRole="stores" ToRole="sales" />
+        </EntityType>
+        <EntityType Name="titleauthor">
+          <Key>
+            <PropertyRef Name="au_id" />
+            <PropertyRef Name="title_id" />
+          </Key>
+          <Property Name="au_id" Type="String" Nullable="false" MaxLength="11" Unicode="false" FixedLength="false" />
+          <Property Name="title_id" Type="String" Nullable="false" MaxLength="6" Unicode="false" FixedLength="false" />
+          <Property Name="au_ord" Type="Byte" />
+          <Property Name="royaltyper" Type="Int32" />
+          <NavigationProperty Name="author" Relationship="pubsModel.FK__titleauth__au_id__0CBAE877" FromRole="titleauthor" ToRole="authors" />
+          <NavigationProperty Name="title" Relationship="pubsModel.FK__titleauth__title__0DAF0CB0" FromRole="titleauthor" ToRole="titles" />
+        </EntityType>
+        <EntityType Name="title">
+          <Key>
+            <PropertyRef Name="title_id" />
+          </Key>
+          <Property Name="title_id" Type="String" Nullable="false" MaxLength="6" Unicode="false" FixedLength="false" />
+          <Property Name="title1" Type="String" Nullable="false" MaxLength="80" Unicode="false" FixedLength="false" />
+          <Property Name="type" Type="String" Nullable="false" MaxLength="12" Unicode="false" FixedLength="true" />
+          <Property Name="pub_id" Type="String" MaxLength="4" Unicode="false" FixedLength="true" />
+          <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="advance" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="royalty" Type="Int32" />
+          <Property Name="ytd_sales" Type="Int32" />
+          <Property Name="notes" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="pubdate" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="publisher" Relationship="pubsModel.FK__titles__pub_id__08EA5793" FromRole="titles" ToRole="publishers" />
+          <NavigationProperty Name="roysched" Relationship="pubsModel.FK__roysched__title___15502E78" FromRole="titles" ToRole="roysched" />
+          <NavigationProperty Name="sales" Relationship="pubsModel.FK__sales__title_id__1367E606" FromRole="titles" ToRole="sales" />
+          <NavigationProperty Name="titleauthors" Relationship="pubsModel.FK__titleauth__title__0DAF0CB0" FromRole="titles" ToRole="titleauthor" />
+        </EntityType>
+        <Association Name="FK__titleauth__au_id__0CBAE877">
+          <End Role="authors" Type="pubsModel.author" Multiplicity="1" />
+          <End Role="titleauthor" Type="pubsModel.titleauthor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="authors">
+              <PropertyRef Name="au_id" />
+            </Principal>
+            <Dependent Role="titleauthor">
+              <PropertyRef Name="au_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__discounts__stor___173876EA">
+          <End Role="stores" Type="pubsModel.store" Multiplicity="0..1" />
+          <End Role="discounts" Type="pubsModel.discount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="stores">
+              <PropertyRef Name="stor_id" />
+            </Principal>
+            <Dependent Role="discounts">
+              <PropertyRef Name="stor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__employee__job_id__25869641">
+          <End Role="jobs" Type="pubsModel.job" Multiplicity="1" />
+          <End Role="employee" Type="pubsModel.employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="jobs">
+              <PropertyRef Name="job_id" />
+            </Principal>
+            <Dependent Role="employee">
+              <PropertyRef Name="job_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__employee__pub_id__286302EC">
+          <End Role="publishers" Type="pubsModel.publisher" Multiplicity="1" />
+          <End Role="employee" Type="pubsModel.employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="publishers">
+              <PropertyRef Name="pub_id" />
+            </Principal>
+            <Dependent Role="employee">
+              <PropertyRef Name="pub_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__pub_info__pub_id__20C1E124">
+          <End Role="publishers" Type="pubsModel.publisher" Multiplicity="1" />
+          <End Role="pub_info" Type="pubsModel.pub_info" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="publishers">
+              <PropertyRef Name="pub_id" />
+            </Principal>
+            <Dependent Role="pub_info">
+              <PropertyRef Name="pub_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__titles__pub_id__08EA5793">
+          <End Role="publishers" Type="pubsModel.publisher" Multiplicity="0..1" />
+          <End Role="titles" Type="pubsModel.title" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="publishers">
+              <PropertyRef Name="pub_id" />
+            </Principal>
+            <Dependent Role="titles">
+              <PropertyRef Name="pub_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__roysched__title___15502E78">
+          <End Role="titles" Type="pubsModel.title" Multiplicity="1" />
+          <End Role="roysched" Type="pubsModel.roysched" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="titles">
+              <PropertyRef Name="title_id" />
+            </Principal>
+            <Dependent Role="roysched">
+              <PropertyRef Name="title_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__sales__stor_id__1273C1CD">
+          <End Role="stores" Type="pubsModel.store" Multiplicity="1" />
+          <End Role="sales" Type="pubsModel.sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="stores">
+              <PropertyRef Name="stor_id" />
+            </Principal>
+            <Dependent Role="sales">
+              <PropertyRef Name="stor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__sales__title_id__1367E606">
+          <End Role="titles" Type="pubsModel.title" Multiplicity="1" />
+          <End Role="sales" Type="pubsModel.sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="titles">
+              <PropertyRef Name="title_id" />
+            </Principal>
+            <Dependent Role="sales">
+              <PropertyRef Name="title_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__titleauth__title__0DAF0CB0">
+          <End Role="titles" Type="pubsModel.title" Multiplicity="1" />
+          <End Role="titleauthor" Type="pubsModel.titleauthor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="titles">
+              <PropertyRef Name="title_id" />
+            </Principal>
+            <Dependent Role="titleauthor">
+              <PropertyRef Name="title_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="pubsModelStoreContainer" CdmEntityContainer="pubsEntities">
+          <EntitySetMapping Name="authors">
+            <EntityTypeMapping TypeName="pubsModel.author">
+              <MappingFragment StoreEntitySet="authors">
+                <ScalarProperty Name="au_id" ColumnName="au_id" />
+                <ScalarProperty Name="au_lname" ColumnName="au_lname" />
+                <ScalarProperty Name="au_fname" ColumnName="au_fname" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="zip" ColumnName="zip" />
+                <ScalarProperty Name="contract" ColumnName="contract" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="discounts">
+            <EntityTypeMapping TypeName="pubsModel.discount">
+              <MappingFragment StoreEntitySet="discounts">
+                <ScalarProperty Name="discounttype" ColumnName="discounttype" />
+                <ScalarProperty Name="stor_id" ColumnName="stor_id" />
+                <ScalarProperty Name="lowqty" ColumnName="lowqty" />
+                <ScalarProperty Name="highqty" ColumnName="highqty" />
+                <ScalarProperty Name="discount1" ColumnName="discount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="employees">
+            <EntityTypeMapping TypeName="pubsModel.employee">
+              <MappingFragment StoreEntitySet="employee">
+                <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+                <ScalarProperty Name="fname" ColumnName="fname" />
+                <ScalarProperty Name="minit" ColumnName="minit" />
+                <ScalarProperty Name="lname" ColumnName="lname" />
+                <ScalarProperty Name="job_id" ColumnName="job_id" />
+                <ScalarProperty Name="job_lvl" ColumnName="job_lvl" />
+                <ScalarProperty Name="pub_id" ColumnName="pub_id" />
+                <ScalarProperty Name="hire_date" ColumnName="hire_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="jobs">
+            <EntityTypeMapping TypeName="pubsModel.job">
+              <MappingFragment StoreEntitySet="jobs">
+                <ScalarProperty Name="job_id" ColumnName="job_id" />
+                <ScalarProperty Name="job_desc" ColumnName="job_desc" />
+                <ScalarProperty Name="min_lvl" ColumnName="min_lvl" />
+                <ScalarProperty Name="max_lvl" ColumnName="max_lvl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pub_info">
+            <EntityTypeMapping TypeName="pubsModel.pub_info">
+              <MappingFragment StoreEntitySet="pub_info">
+                <ScalarProperty Name="pub_id" ColumnName="pub_id" />
+                <ScalarProperty Name="logo" ColumnName="logo" />
+                <ScalarProperty Name="pr_info" ColumnName="pr_info" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="publishers">
+            <EntityTypeMapping TypeName="pubsModel.publisher">
+              <MappingFragment StoreEntitySet="publishers">
+                <ScalarProperty Name="pub_id" ColumnName="pub_id" />
+                <ScalarProperty Name="pub_name" ColumnName="pub_name" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="country" ColumnName="country" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="royscheds">
+            <EntityTypeMapping TypeName="pubsModel.roysched">
+              <MappingFragment StoreEntitySet="roysched">
+                <ScalarProperty Name="title_id" ColumnName="title_id" />
+                <ScalarProperty Name="lorange" ColumnName="lorange" />
+                <ScalarProperty Name="hirange" ColumnName="hirange" />
+                <ScalarProperty Name="royalty" ColumnName="royalty" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sales">
+            <EntityTypeMapping TypeName="pubsModel.sale">
+              <MappingFragment StoreEntitySet="sales">
+                <ScalarProperty Name="stor_id" ColumnName="stor_id" />
+                <ScalarProperty Name="ord_num" ColumnName="ord_num" />
+                <ScalarProperty Name="ord_date" ColumnName="ord_date" />
+                <ScalarProperty Name="qty" ColumnName="qty" />
+                <ScalarProperty Name="payterms" ColumnName="payterms" />
+                <ScalarProperty Name="title_id" ColumnName="title_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="stores">
+            <EntityTypeMapping TypeName="pubsModel.store">
+              <MappingFragment StoreEntitySet="stores">
+                <ScalarProperty Name="stor_id" ColumnName="stor_id" />
+                <ScalarProperty Name="stor_name" ColumnName="stor_name" />
+                <ScalarProperty Name="stor_address" ColumnName="stor_address" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="zip" ColumnName="zip" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="titleauthors">
+            <EntityTypeMapping TypeName="pubsModel.titleauthor">
+              <MappingFragment StoreEntitySet="titleauthor">
+                <ScalarProperty Name="au_id" ColumnName="au_id" />
+                <ScalarProperty Name="title_id" ColumnName="title_id" />
+                <ScalarProperty Name="au_ord" ColumnName="au_ord" />
+                <ScalarProperty Name="royaltyper" ColumnName="royaltyper" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="titles">
+            <EntityTypeMapping TypeName="pubsModel.title">
+              <MappingFragment StoreEntitySet="titles">
+                <ScalarProperty Name="title_id" ColumnName="title_id" />
+                <ScalarProperty Name="title1" ColumnName="title" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="pub_id" ColumnName="pub_id" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="advance" ColumnName="advance" />
+                <ScalarProperty Name="royalty" ColumnName="royalty" />
+                <ScalarProperty Name="ytd_sales" ColumnName="ytd_sales" />
+                <ScalarProperty Name="notes" ColumnName="notes" />
+                <ScalarProperty Name="pubdate" ColumnName="pubdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Model">
+        <EntityTypeShape EntityType="pubsModel.author" Width="1.5" PointX="3" PointY="20.25" Height="2.9417936197916674" IsExpanded="true" />
+        <EntityTypeShape EntityType="pubsModel.discount" Width="1.5" PointX="5.25" PointY="18.625" Height="2.172587890624996" IsExpanded="true" />
+        <EntityTypeShape EntityType="pubsModel.employee" Width="1.5" PointX="3" PointY="5.25" Height="2.9417936197916648" IsExpanded="true" />
+        <EntityTypeShape EntityType="pubsModel.job" Width="1.5" PointX="0.75" PointY="3.75" Height="1.9802864583333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="pubsModel.pub_info" Width="1.5" PointX="3" PointY="9.375" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="pubsModel.publisher" Width="1.5" PointX="0.75" PointY="7.5" Height="2.5571907552083317" IsExpanded="true" />
+        <EntityTypeShape EntityType="pubsModel.roysched" Width="1.5" PointX="5.25" PointY="12.75" Height="1.9802864583333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="pubsModel.sale" Width="1.5" PointX="5.25" PointY="9.5" Height="2.5571907552083317" IsExpanded="true" />
+        <EntityTypeShape EntityType="pubsModel.store" Width="1.5" PointX="3" PointY="16.5" Height="2.5571907552083317" IsExpanded="true" />
+        <EntityTypeShape EntityType="pubsModel.titleauthor" Width="1.5" PointX="5.25" PointY="15.625" Height="2.1725878906250014" IsExpanded="true" />
+        <EntityTypeShape EntityType="pubsModel.title" Width="1.5" PointX="3" PointY="11.875" Height="3.7109993489583317" IsExpanded="true" />
+        <AssociationConnector Association="pubsModel.FK__titleauth__au_id__0CBAE877" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="20.251152846153843" />
+          <ConnectorPoint PointX="4.875" PointY="19.876152846153843" />
+          <ConnectorPoint PointX="4.875" PointY="16.7112939453125" />
+          <ConnectorPoint PointX="5.25" PointY="16.7112939453125" />
+        </AssociationConnector>
+        <AssociationConnector Association="pubsModel.FK__discounts__stor___173876EA" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="18.841095377604166" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="18.841095377604166" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="18.841095377604166" />
+          <ConnectorPoint PointX="5.25" PointY="18.841095377604166" />
+        </AssociationConnector>
+        <AssociationConnector Association="pubsModel.FK__employee__job_id__25869641" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="5.4901432291666667" />
+          <ConnectorPoint PointX="3" PointY="5.4901432291666667" />
+        </AssociationConnector>
+        <AssociationConnector Association="pubsModel.FK__employee__pub_id__286302EC" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="7.8458968098958319" />
+          <ConnectorPoint PointX="3" PointY="7.8458968098958319" />
+        </AssociationConnector>
+        <AssociationConnector Association="pubsModel.FK__pub_info__pub_id__20C1E124" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="9.7160953776041659" />
+          <ConnectorPoint PointX="3" PointY="9.7160953776041659" />
+        </AssociationConnector>
+        <AssociationConnector Association="pubsModel.FK__titles__pub_id__08EA5793" ManuallyRouted="false">
+          <ConnectorPoint PointX="1.5" PointY="10.057190755208332" />
+          <ConnectorPoint PointX="1.5" PointY="13.730499674479166" />
+          <ConnectorPoint PointX="3" PointY="13.730499674479166" />
+        </AssociationConnector>
+        <AssociationConnector Association="pubsModel.FK__roysched__title___15502E78" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="13.740143229166666" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="13.740143229166666" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="13.740143229166666" />
+          <ConnectorPoint PointX="5.25" PointY="13.740143229166666" />
+        </AssociationConnector>
+        <AssociationConnector Association="pubsModel.FK__sales__stor_id__1273C1CD" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="16.501152846153843" />
+          <ConnectorPoint PointX="4.875" PointY="16.126152846153843" />
+          <ConnectorPoint PointX="4.875" PointY="10.778595377604166" />
+          <ConnectorPoint PointX="5.25" PointY="10.778595377604166" />
+        </AssociationConnector>
+        <AssociationConnector Association="pubsModel.FK__sales__title_id__1367E606" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="11.938460538461539" />
+          <ConnectorPoint PointX="4.8160744349011209" PointY="11.62238610356042" />
+          <ConnectorPoint PointX="4.9339255650988791" PointY="11.504534973362663" />
+          <ConnectorPoint PointX="5.0625" PointY="11.375960538461541" />
+          <ConnectorPoint PointX="5.0625" PointY="12.245843601362179" />
+          <ConnectorPoint PointX="5.2511528461538459" PointY="12.057190755208332" />
+        </AssociationConnector>
+        <AssociationConnector Association="pubsModel.FK__titleauth__title__0DAF0CB0" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="15.52369065665064" />
+          <ConnectorPoint PointX="4.8160744349011217" PointY="15.83976509155176" />
+          <ConnectorPoint PointX="4.9339255650988791" PointY="15.957616221749518" />
+          <ConnectorPoint PointX="5.0625" PointY="16.08619065665064" />
+          <ConnectorPoint PointX="5.0625" PointY="15.436347153846153" />
+          <ConnectorPoint PointX="5.2511528461538459" PointY="15.625" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

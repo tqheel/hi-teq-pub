@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using pubsModel;
 
 
 /// <summary>
@@ -9,14 +10,14 @@ using System.Web;
 /// </summary>
 public class Pubs
 {
-    //public static IEnumerable<publisher> GetPublishers()
-    //{
+    public static List<publisher> GetPublishers()
+    {
 
-    //    using (pubsEntities context = new pubsEntities())
-    //    {
-    //        IEnumerable<publisher> pList = context.publishers.OrderBy(x => x.pub_name);
-    //        return pList;
-    //    }
+        using (pubsEntities context = new pubsEntities())
+        {
+            IEnumerable<publisher> pList = context.publishers.OrderBy(x => x.pub_name);
+            return pList.ToList();
+        }
 
-    //}
+    }
 }
