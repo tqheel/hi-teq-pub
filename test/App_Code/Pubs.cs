@@ -41,37 +41,40 @@ public class Pubs
             //Iterate through the orders and calculate the royalty for each
             foreach (sale o in orders)
             {
-                _Royalty r = new _Royalty();
-                r.StoreName = o.store.stor_name;
-                r.OrderNumber = o.ord_num;
-                r.OrderDate = o.ord_date.ToShortDateString();
-                r.Title = o.title.title1;
-                titleauthor ta = context.titleauthors.FirstOrDefault(x => x.title_id == o.title_id);
-                r.Title = ta.title.title1;
-                r.Author = ta.author.au_lname + ", " + ta.author.au_fname;
-                //Now calculate the royalty for the current order, as long as the price and royalty are not missing for the order title
-                if (o.title.price != null && o.title.royalty != null)
+                IEnumerable<titleauthor> tauthors = context.titleauthors.Where(x => x.title_id == o.title_id);
+                foreach (titleauthor ta in tauthors)
                 {
-                    decimal saleAmount  = (decimal)o.qty * Convert.ToDecimal(o.title.price);
-                    //I'm making the assumption that the Royalty field in table title will get updated automatically from table roysched when the next title sales qty threshold is reached
-                    decimal royaltyRate = Convert.ToDecimal(o.title.royalty) / 100;
-                    decimal royaltyPercent = Convert.ToDecimal(ta.royaltyper) / 100;
-                    //calculate the royalty amount and convert it to a string formatted as currency
-                    //r.Royalty = String.Format("{0:C}", (saleAmount * royaltyRate * royaltyPercent));
-                    r.Royalty = (saleAmount * royaltyRate * royaltyPercent).ToString("C");
+                    _Royalty r = new _Royalty();
+                    r.StoreName = o.store.stor_name;
+                    r.OrderNumber = o.ord_num;
+                    r.OrderDate = o.ord_date.ToShortDateString();
+                    r.Title = o.title.title1;
+                    r.Title = ta.title.title1;
+                    r.Author = ta.author.au_lname + ", " + ta.author.au_fname;
+                    //Now calculate the royalty for the current order, as long as the price and royalty are not missing for the order title
+                    if (o.title.price != null && o.title.royalty != null)
+                    {
+                        decimal saleAmount = (decimal)o.qty * Convert.ToDecimal(o.title.price);
+                        //I'm making the assumption that the Royalty field in table title will get updated automatically from table roysched when the next title sales qty threshold is reached
+                        decimal royaltyRate = Convert.ToDecimal(o.title.royalty) / 100;
+                        decimal royaltyPercent = Convert.ToDecimal(ta.royaltyper) / 100;
+                        //calculate the royalty amount and convert it to a string formatted as currency
+                        //r.Royalty = String.Format("{0:C}", (saleAmount * royaltyRate * royaltyPercent));
+                        r.Royalty = (saleAmount * royaltyRate * royaltyPercent).ToString("C");
+                    }
+                    else
+                    {
+                        //No price for the current title is set in the db, so royalty cannot be computed
+                        r.Royalty = "Not available. No price set.";
+                    }
+                    //add the r object to the list
+                    royalties.Add(r);
                 }
-                else
-                {
-                    //No price for the current title is set in the db, so royalty cannot be computed
-                    r.Royalty = "Not available. No price set.";
-                }
-                //add the r object to the list
-                royalties.Add(r);
             }
 
         }
         //sort the list by author, before returning
-        return royalties.OrderBy(x => x.Author).ToList();
+        return royalties.OrderBy(x=>x.StoreName).ThenBy(x=>x.OrderNumber).ThenBy(x => x.Author).ToList();
     }
 
     /// <summary>
