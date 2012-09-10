@@ -91,6 +91,35 @@ public class Pubs
         }
 
     }
+    /// <summary>
+    /// Custom class for Publisher Contacts
+    /// </summary>
+    public class _Contact
+    {
+        public string JobTitle { get; set; }
+        public string Name { get; set; }
+    }
 
-    
+    /// <summary>
+    /// Method for retrieving a given publisher's PR and sales contacts
+    /// </summary>
+    /// <param name="pubID">Publisher's ID</param>
+    /// <returns>List of type _Contact</returns>
+    public static List<_Contact> GetContacts(string pubID)
+    {
+        List<_Contact> contacts = new List<_Contact>();
+        using (pubsEntities context = new pubsEntities())
+        {
+            IEnumerable<employee> employees = context.employees.Where(x => x.pub_id == pubID &&
+                                                                     (x.job_id == 8 || x.job_id == 13));
+            foreach (employee e in employees)
+            {
+                _Contact c = new _Contact();
+                c.JobTitle = e.job.job_desc;
+                c.Name = e.lname + ", " + e.fname;
+                contacts.Add(c);
+            }
+            return contacts.OrderBy(x => x.JobTitle).ThenBy(x => x.Name).ToList();
+        }
+    }
 }

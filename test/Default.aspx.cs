@@ -19,6 +19,7 @@ public partial class _Default: System.Web.UI.Page
             ddlPubs.DataBind();
             //bind initial data grid to the default publisher in the DDL
             RefreshRoyalties();
+            RefreshContacts();
         }
        
     }
@@ -26,12 +27,14 @@ public partial class _Default: System.Web.UI.Page
     protected void ddlPubs_SelectedIndexChanged(object sender, EventArgs e)
     {
         RefreshRoyalties();
+        RefreshContacts();
     }
 
 
     private void RefreshRoyalties()
     {
         //bind initial data grid to the default publisher in the DDL
+        //System.Threading.Thread.Sleep(5000);
         List<Pubs._Royalty> royalties = Pubs.GetRoyalties(ddlPubs.SelectedValue);
         if (royalties.Count() > 0)
         {
@@ -45,4 +48,22 @@ public partial class _Default: System.Web.UI.Page
         }
 
     }
+
+    private void RefreshContacts()
+    {
+        List<Pubs._Contact> contacts = Pubs.GetContacts(ddlPubs.SelectedValue);
+        if (contacts.Count() > 0)
+        {
+            GridView2.DataSource = contacts;
+            GridView2.DataBind();
+        }
+        else
+        {
+            GridView2.EmptyDataText = "There are no PR or Sales Contacts for the selected publisher.";
+            GridView2.DataBind();
+        }
+
+    }
+
+
 }

@@ -18,12 +18,25 @@
         </ul>
         
         <div id="gridview">
+            
             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
                 <asp:DropDownList ID="ddlPubs" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlPubs_SelectedIndexChanged">
                 </asp:DropDownList>
+                <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel1">
+                <ProgressTemplate>
+                    Loading Table...Please Wait...
+                </ProgressTemplate>
+                
+            </asp:UpdateProgress>
+                <h4>Author Royalties Per Title/Author</h4>
                 <asp:GridView ID="GridView1" runat="server"
                             CssClass="altCellWhite"
+                            AlternatingRowStyle-CssClass="altCellGray" >
+                </asp:GridView>
+                <h4>PR and Sales Contacts for the Selected Publisher</h4>
+                <asp:GridView ID="GridView2" runat="server"
+                    CssClass="altCellWhite"
                             AlternatingRowStyle-CssClass="altCellGray" >
                 </asp:GridView>
             </ContentTemplate>
