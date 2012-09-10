@@ -20,14 +20,17 @@
         <div id="gridview">
             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
-                <asp:DropDownList ID="ddlPubs" runat="server">
+                <asp:DropDownList ID="ddlPubs" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlPubs_SelectedIndexChanged">
                 </asp:DropDownList>
                 <asp:GridView ID="GridView1" runat="server"
                             CssClass="altCellWhite"
                             AlternatingRowStyle-CssClass="altCellGray" >
                 </asp:GridView>
             </ContentTemplate>
-            
+            <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="ddlPubs" EventName="SelectedIndexChanged" />
+
+            </Triggers>
 
             </asp:UpdatePanel>
             
