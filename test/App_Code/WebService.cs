@@ -33,5 +33,43 @@ public class WebService : System.Web.Services.WebService {
         p.City = pub.city;
         return p;
     }
+
+    [WebMethod(EnableSession = true)]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json, UseHttpGet = false)]
+    public void SavePublisher(string pubID, string name, string city)
+    {
+        Validate._Error e = new Validate._Error();
+        e.Msg = string.Empty;
+        e.Caught = false;
+        if (!Validate.IsFieldPopulated(name))
+        {
+            e = Validate.UpdateErrorObject(e, "Publisher name cannot be blank.", true);
+        }
+        else
+        {
+            if(!Validate.IsStringShortEnough(name, 40))
+            {
+                e=Validate.UpdateErrorObject(e, "Publisher name cannot be longer than 40 characters.", true);
+            }
+        }
+        if (!Validate.IsStringShortEnough(city, 20))
+        {
+            e = Validate.UpdateErrorObject(e, "City cannot be more than 20 characters.", true);
+        }
+        //If errors caught then throw exception with error message
+        if (e.Caught)
+        {
+            throw new Exception(e.Msg);
+        }
+        //if we made it this far then no errors found
+        using (pubsEntities context = new pubsEntities())
+        {
+            publisher pub = context.publishers.FirstOrDefault(x => x.pub_id == pubID);
+            pub.pub_name = name;
+            pub.city = city;
+            context.publishers.ApplyCurrentValues(pub);
+            context.SaveChanges();
+        }
+    }
     
 }

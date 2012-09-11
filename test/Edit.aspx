@@ -8,7 +8,13 @@
             $('#<%= ddlPub.ClientID %>').change(function () {
                 getPub();
             });
-        });
+
+            //event handler for save button click
+            $('#save-button').click(function (e) {
+                e.preventDefault();
+
+            });
+        }); //end doc ready function
 
         function getPub() {
             var pubID = $('#<%= ddlPub.ClientID %>').val();
@@ -53,7 +59,7 @@
         </dd>
         <dt>&nbsp;</dt>
         <dd>
-            
+            <input id="save-button" type="button" value="Save Changes" />
         </dd>
     </dl>
 
