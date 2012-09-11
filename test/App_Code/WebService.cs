@@ -15,11 +15,23 @@ using pubsModel;
  [System.Web.Script.Services.ScriptService]
 public class WebService : System.Web.Services.WebService {
 
+    public class _Pub
+    {
+        public string PubID {get;set;}
+        public string Name { get; set; }
+        public string City { get; set; }
+    }
+
     [WebMethod(EnableSession = true)]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json, UseHttpGet = false)]
-    public publisher GetPublisher(string pubID)
+    public _Pub GetPublisher(string pubID)
     {
-        return Pubs.GetSinglePub(pubID);
+        publisher pub = Pubs.GetSinglePub(pubID);
+        _Pub p = new _Pub();
+        p.PubID = pub.pub_name;
+        p.Name = pub.pub_name;
+        p.City = pub.city;
+        return p;
     }
     
 }

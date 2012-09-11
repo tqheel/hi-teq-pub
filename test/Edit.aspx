@@ -3,28 +3,36 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     <script type="text/javascript">
         $(document).ready(function () {
+            getPub();
+
             $('#<%= ddlPub.ClientID %>').change(function () {
-                var pubID = $('#<%= ddlPub.ClientID %>').val();
-                $.blockUI({ message: '<h4> Getting Publisher Info ... </h4>' });
-                $.ajax({
-                    type: 'POST',
-                    contentType: 'application/json; charset=utf-8',
-                    url: '../WebServices/ScorecardWS.asmx/SaveChapterROAStatus',
-                    data: JSON.stringify({ chapRoaID: selectedROA, status: checked }),
-                    dataType: 'json'
-                })
-                .success(function (data) {
-                    $.unblockUI();
-                    //populateROAs(chapID, fy)
-                    populateScorecardAchievements(chapID, fy);
-                })
-                .error(function (xhr) {
-                    var r = JSON.parse(xhr.responseText);
-                    $.unblockUI();
-                    alert(r.Message);
-                });
+                getPub();
             });
         });
+
+        function getPub() {
+            var pubID = $('#<%= ddlPub.ClientID %>').val();
+            $.blockUI({ message: '<h4> Getting Publisher Info ... </h4>' });
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                url: 'WebService.asmx/GetPublisher',
+                data: JSON.stringify({ pubID: pubID }),
+                dataType: 'json'
+            })
+            .success(function (data) {
+                $.unblockUI();
+                var pub = data.d;
+                $('#select-pub-id').val(pub.PubID);
+                $('#<%= txtName.ClientID %>').val(pub.Name);
+                $('#<%= txtCity.ClientID %>').val(pub.City);
+                })
+            .error(function (xhr) {
+                var r = JSON.parse(xhr.responseText);
+                $.unblockUI();
+                alert(r.Message);
+            });
+        }
 
     </script>
 </asp:Content>
@@ -33,6 +41,7 @@
     Select Publisher to Edit:&nbsp;
     <asp:DropDownList ID="ddlPub" runat="server"></asp:DropDownList>
     <fieldset id="pub-detail">
+        <input id="select-pub-id" type="hidden" />
         <dl class="form">
         <dt>Publisher Name:</dt>
         <dd>
