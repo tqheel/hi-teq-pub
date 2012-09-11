@@ -28,7 +28,7 @@ public class WebService : System.Web.Services.WebService {
     {
         publisher pub = Pubs.GetSinglePub(pubID);
         _Pub p = new _Pub();
-        p.PubID = pub.pub_name;
+        p.PubID = pub.pub_id;
         p.Name = pub.pub_name;
         p.City = pub.city;
         return p;

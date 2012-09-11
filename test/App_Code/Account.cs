@@ -21,6 +21,11 @@ public class Account
 
     public static bool AuthenticateUser(string userName, string email, string password)
     {
+        //first validate the email address
+        if (!Validate.IsValidEmail(email))
+        {
+            throw new Exception("The e-mail address provided is not valid. You must provide a valid email address before logging-in.");
+        }
         if (password == PASSWORD)
         {
             User user = new User();

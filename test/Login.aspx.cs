@@ -14,20 +14,30 @@ public partial class Login : System.Web.UI.Page
     }
     protected void btnLogin_Click(object sender, EventArgs e)
     {
-        bool IsAuthenticated = Account.AuthenticateUser(txtUserName.Text, txtEmail.Text, txtPassword.Text);
-        if (IsAuthenticated)
+        bool IsAuthenticated = false;
+        try
         {
-            //set cookie with login time
-            HttpCookie loginCookie = new HttpCookie("loginCookie");
-            loginCookie.Value = DateTime.Now.ToString();
-            Response.Cookies.Add(loginCookie);
-            Response.Redirect("Default.aspx");
-            
+            IsAuthenticated = Account.AuthenticateUser(txtUserName.Text, txtEmail.Text, txtPassword.Text);
+            if (IsAuthenticated)
+            {
+                //set cookie with login time
+                HttpCookie loginCookie = new HttpCookie("loginCookie");
+                loginCookie.Value = DateTime.Now.ToString();
+                Response.Cookies.Add(loginCookie);
+                Response.Redirect("Default.aspx");
+
+            }
+            else
+            {
+                lblError.Text = "Sorry, your credentials were not recognized. Access denied! :( ";
+                lblError.Visible = true;
+            }
         }
-        else
+        catch (Exception ex)
         {
-            lblError.Text = "Sorry, your credentials were not recognized. Access denied! :( ";
+            lblError.Text = ex.Message.ToString();
             lblError.Visible = true;
         }
+        
     }
 }
