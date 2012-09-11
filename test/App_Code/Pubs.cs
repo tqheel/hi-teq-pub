@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 using pubsModel;
 
@@ -120,6 +121,47 @@ public class Pubs
                 contacts.Add(c);
             }
             return contacts.OrderBy(x => x.JobTitle).ThenBy(x => x.Name).ToList();
+        }
+    }
+
+    public static void AddPub(string pubName, string city, string state)
+    {
+        StringBuilder error = new StringBuilder();
+        bool eCaught = false;
+        if (pubName.Length > 40)
+        {
+            eCaught = true;
+            error.Append("Publisher Name cannot be longer than 40 characters." );
+        }
+        if (city.Length > 20)
+        {
+            eCaught = true;
+            error.Append("City cannot be longer than 20 characters.");
+        }
+        if (eCaught) throw new Exception(error.ToString());
+        using (pubsEntities context = new pubsEntities())
+        {
+            publisher pub = new publisher();
+            //pub_id code must be a 4 digit code beginning with 99. get list of existing and find next available code
+            
+            int nextCode = 9900;
+            while (context.publishers.Any(x => x.pub_id == nextCode.ToString()))
+            {
+                nextCode++;
+            }
+            pub.pub_id = nextCode.ToString();
+            pub.pub_name = pubName;
+            pub.city = city;
+            pub.state = state;
+            //try
+            //{
+                context.publishers.AddObject(pub);
+                context.SaveChanges();
+            //}
+            //catch
+            //{
+            //    throw new Exception("Sorry, the maximum number of publishers has been exceeded. Your publisher cannot be added.");
+            //}
         }
     }
 }
