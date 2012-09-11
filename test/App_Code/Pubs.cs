@@ -131,7 +131,7 @@ public class Pubs
         if (pubName.Length > 40 || pubName.Length==0)
         {
             eCaught = true;
-            error.Append("Publisher Name cannot be blank and cannot be longer than 40 characters." );
+            error.Append("Publisher Name cannot be blank and cannot be longer than 40 characters. ");
         }
         if (city.Length > 20)
         {

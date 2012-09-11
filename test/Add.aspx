@@ -26,9 +26,10 @@
         <dt>&nbsp;</dt>
         <dd>
             <asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click" style="height: 26px" />
+            <asp:Button ID="btnReset" runat="server" Text="Add Another" OnClick="btnReset_Click" />
         </dd>
     </dl>
     <asp:Label ID="lblResult" runat="server" Text="The new Publisher has been added."></asp:Label>
-    <asp:Button ID="btnReset" runat="server" Text="Add Another" OnClick="btnReset_Click" />
+    
 </asp:Content>
 

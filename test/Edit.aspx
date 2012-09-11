@@ -47,6 +47,9 @@
     Select Publisher to Edit:&nbsp;
     <asp:DropDownList ID="ddlPub" runat="server"></asp:DropDownList>
     <fieldset id="pub-detail">
+        <div id="errors">
+
+        </div>
         <input id="select-pub-id" type="hidden" />
         <dl class="form">
         <dt>Publisher Name:</dt>
