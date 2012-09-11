@@ -81,5 +81,14 @@ body
 
 /* For styling forms using definition lists*/
 dl.form     { clear: both; }
-dl.form dt  { float: left; clear: left; width: 150px; padding: 8px !important; }
+dl.form dt  { float: left; text-align: right; clear: left; width: 200px; padding: 8px !important; }
 dl.form dd  { padding: 8px; }
+
+.tip {
+    font-size: smaller;
+    color: Green;
+}
+.error {
+    color: red;
+    font-weight: bold;
+}

@@ -17,7 +17,7 @@ public class Account
         public string Email { get; set; }
     }
 
-    private const string PASSWORD = "password";
+    public const string PASSWORD = "letmein";
 
     public static bool AuthenticateUser(string userName, string email, string password)
     {

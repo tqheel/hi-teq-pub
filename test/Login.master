@@ -1,0 +1,40 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Login.master.cs" Inherits="Login" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Login</title>
+    <link href="~/css/sitestyles.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div id="header">
+            <table align="center" cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tr>
+                    <td class="logoText" style="vertical-align: middle;" width="75%">
+                        <img src="img/logo.PNG" border="0" height="75" />
+                        Hi-Teq Publishers Reporting Tool
+                    </td>
+                    <td style="text-align: right;">
+                        <hr class="logoLines" width="20%" />
+                        <hr class="logoLines" width="40%" />
+                        <hr class="logoLines" width="60%" />
+                        <hr class="logoLines" width="80%" />
+                        <hr class="logoLines" width="100%" />
+                    </td>
+                </tr>
+                <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+            </table>
+
+        </div>
+    <div>
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+</body>
+</html>

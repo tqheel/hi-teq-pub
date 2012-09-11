@@ -50,6 +50,9 @@
                     <li><a href="Default.aspx">Reports</a></li>
                     <li><a href="Add.aspx">Add Publisher</a></li>
                     <li><a href="Edit.aspx">Edit Publisher</a></li>
+                    <li>
+                        <asp:LinkButton ID="lbtLogout" runat="server" OnClick="lbtLogout_Click">Logout</asp:LinkButton>
+                    </li>
                 </ul>
             </div>
 
