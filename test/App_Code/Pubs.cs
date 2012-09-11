@@ -166,4 +166,15 @@ public class Pubs
             }
         }
     }
+
+
+
+
+    public static publisher GetSinglePub(string pubID)
+    {
+        using (pubsEntities context = new pubsEntities())
+        {
+            return context.publishers.FirstOrDefault(x => x.pub_id == pubID);
+        }
+    }
 }
