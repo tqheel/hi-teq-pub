@@ -155,15 +155,15 @@ public class Pubs
             pub.pub_name = pubName;
             pub.city = city;
             pub.state = state;
-            //try
-            //{
+            try
+            {
                 context.publishers.AddObject(pub);
                 context.SaveChanges();
-            //}
-            //catch
-            //{
-            //    throw new Exception("Sorry, the maximum number of publishers has been exceeded. Your publisher cannot be added.");
-            //}
+            }
+            catch
+            {
+                throw new Exception("Sorry, the maximum number of publishers has been exceeded. Your publisher cannot be added.");
+            }
         }
     }
 }
