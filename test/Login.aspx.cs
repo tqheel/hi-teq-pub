@@ -17,7 +17,12 @@ public partial class Login : System.Web.UI.Page
         bool IsAuthenticated = Account.AuthenticateUser(txtUserName.Text, txtEmail.Text, txtPassword.Text);
         if (IsAuthenticated)
         {
+            //set cookie with login time
+            HttpCookie loginCookie = new HttpCookie("loginCookie");
+            loginCookie.Value = DateTime.Now.ToString();
+            Response.Cookies.Add(loginCookie);
             Response.Redirect("Default.aspx");
+            
         }
         else
         {

@@ -16,7 +16,10 @@ public partial class MasterPage : System.Web.UI.MasterPage
         }
         else
         {
-
+            HttpCookie loginCookie = new HttpCookie("loginCookie");
+            loginCookie = Request.Cookies["loginCookie"];
+            lblUser.Text = "Hello, " + user.Name + "! (" + user.Email + ")";
+            lblLoginTime.Text = "Active since: " + loginCookie.Value;
         }
     }
 

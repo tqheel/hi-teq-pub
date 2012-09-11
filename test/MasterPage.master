@@ -43,7 +43,8 @@
                         <hr class="logoLines" width="100%" />
                     </td>
                 </tr>
-                <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+                <tr><td><asp:Label ID="lblUser" runat="server" Text="Label"></asp:Label></td><td>
+                    <asp:Label ID="lblLoginTime" runat="server" Text="Label"></asp:Label></td></tr>
             </table>
             <div id="myslidemenu" class="jqueryslidemenu">
                 <ul>
