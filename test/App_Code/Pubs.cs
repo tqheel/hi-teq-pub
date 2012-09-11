@@ -128,10 +128,10 @@ public class Pubs
     {
         StringBuilder error = new StringBuilder();
         bool eCaught = false;
-        if (pubName.Length > 40)
+        if (pubName.Length > 40 || pubName.Length==0)
         {
             eCaught = true;
-            error.Append("Publisher Name cannot be longer than 40 characters." );
+            error.Append("Publisher Name cannot be blank and cannot be longer than 40 characters." );
         }
         if (city.Length > 20)
         {
@@ -145,11 +145,13 @@ public class Pubs
             //pub_id code must be a 4 digit code beginning with 99. get list of existing and find next available code
             
             int nextCode = 9900;
-            while (context.publishers.Any(x => x.pub_id == nextCode.ToString()))
+            string strNextCode = nextCode.ToString();
+            while (context.publishers.Any(x => x.pub_id == strNextCode))
             {
                 nextCode++;
+                strNextCode = nextCode.ToString();
             }
-            pub.pub_id = nextCode.ToString();
+            pub.pub_id = strNextCode;
             pub.pub_name = pubName;
             pub.city = city;
             pub.state = state;
