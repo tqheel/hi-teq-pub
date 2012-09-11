@@ -55,10 +55,12 @@
         <dt>Publisher Name:</dt>
         <dd>
             <asp:TextBox ID="txtName" runat="server"></asp:TextBox>
+            <span class="tip">Cannot be blank. Limit 40 characters.</span>
         </dd>
         <dt>City:</dt>
         <dd>
             <asp:TextBox ID="txtCity" runat="server"></asp:TextBox>
+            <span class="tip">Limit 20 characters.</span>
         </dd>
         <dt>&nbsp;</dt>
         <dd>

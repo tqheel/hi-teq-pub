@@ -13,8 +13,8 @@
     
     <div class="pageText" id="tabs">
         <ul>
-            <li><a href="#gridview">GridView Style Report</a></li>
-            <li><a href="#datatable">jQuery Datatable Style Report</a></li>
+            <li><a href="#gridview">GridView Control Report Example</a></li>
+            <li><a href="#datatable">jQuery Datatable Report Example</a></li>
         </ul>
         
         <div id="gridview">
