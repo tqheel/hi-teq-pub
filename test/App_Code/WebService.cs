@@ -41,7 +41,7 @@ public class WebService : System.Web.Services.WebService {
         Validate._Error e = new Validate._Error();
         e.Msg = string.Empty;
         e.Caught = false;
-        if (!Validate.IsFieldPopulated(name))
+        if (!Validate.IsFieldPopulated(name.Trim()))
         {
             e = Validate.UpdateErrorObject(e, "Publisher name cannot be blank.", true);
         }
@@ -65,8 +65,8 @@ public class WebService : System.Web.Services.WebService {
         using (pubsEntities context = new pubsEntities())
         {
             publisher pub = context.publishers.FirstOrDefault(x => x.pub_id == pubID);
-            pub.pub_name = name;
-            pub.city = city;
+            pub.pub_name = name.Trim();
+            pub.city = city.Trim();
             context.publishers.ApplyCurrentValues(pub);
             context.SaveChanges();
         }

@@ -128,12 +128,12 @@ public class Pubs
     {
         StringBuilder error = new StringBuilder();
         bool eCaught = false;
-        if (pubName.Length > 40 || pubName.Length==0)
+        if (pubName.Trim().Length > 40 || pubName.Trim().Length==0)
         {
             eCaught = true;
             error.Append("Publisher Name cannot be blank and cannot be longer than 40 characters. ");
         }
-        if (city.Length > 20)
+        if (city.Trim().Length > 20)
         {
             eCaught = true;
             error.Append("City cannot be longer than 20 characters.");
@@ -152,8 +152,8 @@ public class Pubs
                 strNextCode = nextCode.ToString();
             }
             pub.pub_id = strNextCode;
-            pub.pub_name = pubName;
-            pub.city = city;
+            pub.pub_name = pubName.Trim();
+            pub.city = city.Trim();
             pub.state = state;
             try
             {
