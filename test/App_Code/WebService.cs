@@ -71,5 +71,19 @@ public class WebService : System.Web.Services.WebService {
             context.SaveChanges();
         }
     }
+
+    [WebMethod(EnableSession = true)]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json, UseHttpGet = false)]
+    public List<Pubs._Royalty> GetRoyalties(string pubID)
+    {
+        return Pubs.GetRoyalties(pubID);
+    }
+
+    [WebMethod(EnableSession = true)]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json, UseHttpGet = false)]
+    public List<Pubs._Contact> GetContacts(string pubID)
+    {
+        return Pubs.GetContacts(pubID);
+    }
     
 }

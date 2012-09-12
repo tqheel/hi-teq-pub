@@ -29,7 +29,7 @@ body
 }
 
 /* use for table/gridview headers */
-.altCellWhite tr:first-child
+.altCellWhite tr:first-child, th
 {
     background-color: Green;
     color: White;
@@ -48,6 +48,7 @@ body
     font-size: 11px;
     text-align: left;
     vertical-align: top;
+    
 }
 
 /* use for gray table/gridview rows */
