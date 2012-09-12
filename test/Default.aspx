@@ -1,6 +1,35 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="_Default" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="head" Runat="Server">
+
+    <script type="text/html" id="royalty-template">
+        {#template MAIN}
+            <table id="royalty-table">
+                <thead>
+                    <th>Store Name</th>
+                    <th>Order Number</th>
+                    <th>Order Date</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Royalty</th>
+                </thead>
+                {#foreach $T.d as royalty}
+                    {#include ROW root=$T.royalty}
+                {#/for}
+            </table>
+        {#/template MAIN}
+        {#template ROW}
+            <tr class="{#cycle values=['','evenRow']}">
+                <td>>{$T.StoreName}</td>
+                <td>{$T.OrderNumber}</td>
+                <td>{$T.OrderDate}</td>
+                <td>{$T.Title}</td>
+                <td>{$T.Author}</td>
+                <td>{$T.Royalty}</td>
+            </tr>
+        {#/template ROW}
+    </script>
+
     <script type="text/javascript">
         $(document).ready(function () {
             $('#tabs').tabs();
@@ -49,7 +78,8 @@
             
         </div>
         <div id="datatable">
-            dataTable goes here
+            <asp:DropDownList ID="ddlPubsJquery" runat="server" AutoPostBack="False">
+            </asp:DropDownList>
 
         </div>
     </div><!--end tabs-->

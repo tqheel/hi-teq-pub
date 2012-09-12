@@ -17,6 +17,11 @@ public partial class _Default: System.Web.UI.Page
             ddlPubs.DataTextField = "pub_name";
             ddlPubs.DataValueField = "pub_id";
             ddlPubs.DataBind();
+            //now repeat the above for jQuery tab
+            ddlPubsJquery.DataSource = pList;
+            ddlPubsJquery.DataTextField = "pub_name";
+            ddlPubsJquery.DataValueField = "pub_id";
+            ddlPubsJquery.DataBind();
             //bind initial data grid to the default publisher in the DDL
             RefreshRoyalties();
             RefreshContacts();
