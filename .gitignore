@@ -29,6 +29,13 @@ obj/
 _ReSharper*/
 [Tt]est[Rr]esult*
 
+#Ignore publish profiles and publish proj
+test/App_Data
+*.publishproj
+
+#Ignore web.config file
+test/*.config
+
 #ignore zip archives
 *.zip
 
